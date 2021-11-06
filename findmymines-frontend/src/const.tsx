@@ -1,17 +1,17 @@
 export const tutorialMsgEng = `
-LEFTClick on any square to reveal what's beneath!
-If it's a bomb, you get 100 points!
-If there's nothing, you get ...nothing...
-If it's a golden bomb, you get even more points!
-Beware of the timer!
-Winner is the one who have more points.
+Left click on any square to reveal what's behind.
+If there is a bomb, you get 100 points!
+If there is nothing, you get nothing...
+If there is a golden bomb, you get even more points!
+Please beware of the timer.
+The winner is the person who have more points.
 `;
 
 export const tutorialMsgThai = `
-คลิกซ้ายที่สี่เหลี่ยมใด ๆ เพื่อเปิดเผยสิ่งที่อยู่ด้านล่าง!
+คลิกซ้ายที่สี่เหลี่ยมใด ๆ เพื่อเปิดเผยสิ่งที่อยู่ด้านหลัง!
 ถ้าเป็นระเบิด คุณจะได้รับ 100 คะแนน!
-ถ้าไม่มีอะไร คุณจะได้ ...ไม่ได้อะไรเลย...
-หากเป็นระเบิดทองคำ คุณจะได้รับคะแนนมากขึ้นไปอีก!
-ระวังตัวจับเวลา!
+ถ้าไม่มีอะไร คุณจะไม่ได้อะไรเลย...
+ถ้าเป็นระเบิดทองคำ คุณจะได้รับคะแนนมากขึ้นไปอีก!
+โปรดระวังตัวจับเวลา!
 ผู้ชนะคือผู้ที่มีคะแนนมากกว่า
 `;

@@ -2,10 +2,10 @@ export function WelcomePage() {
     return (<div>
         <h1>Welcome</h1>
         <form>
-            <label>Input Name</label>
+            <label>Please input your name</label>
             <br></br>
             <input type="text"></input>
-            <button type="submit">OK</button>
+            <button type="submit">Submit</button>
         </form>
     </div>)
 }

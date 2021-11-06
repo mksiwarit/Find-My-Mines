@@ -11,17 +11,15 @@ function JoinRoomForm() {
     const { sendMessage: joinRoom } = useSocketEvent(socket, 'joinRoom');
     const [_name, _setName] = useState<string>("");
     const [name, setName] = useStoredName();
-
     const handleSubmit: FormEventHandler = (ev) => {
         if (_name === undefined) {
-            alert("Input valid name!")
+            alert("Please input a valid name!")
             return;
         }
         setName(_name);
         joinRoom(_name);
         ev.preventDefault();
     }
-
     return (
         <form onSubmit={handleSubmit}>
             <HStack>
@@ -36,7 +34,6 @@ function MainMenu() {
     const { socket, connected, error } = useServerSocket();
     const { players } = usePlayersNames(socket);
     const [name, setName] = useStoredName();
-
     useEffect(() => {
         if (players === undefined || !name) {
             return;
@@ -47,14 +44,13 @@ function MainMenu() {
     },
         [players]
     );
-
     return <div>
         <Text>Current Players: {JSON.stringify(players)}</Text>
         {name ? (
             <Box textAlign="center">
                 <Heading>Welcome, {name}</Heading>
                 <HStack justifyContent="center">
-                    <Text>Waiting for other player...</Text>
+                    <Text>Please wait for another player...</Text>
                     <CircularProgress isIndeterminate />
                 </HStack>
             </Box>

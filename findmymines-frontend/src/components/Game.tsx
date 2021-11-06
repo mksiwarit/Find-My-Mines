@@ -29,7 +29,7 @@ function make_table(open_index: OpenSet, golden_index: [number, number][], board
 }
 
 function Game() {
-    // Setup Socket stuff
+    // Socket connection setup
     const { socket, connected, error } = useServerSocket();
     const { players } = usePlayersNames(socket);
     const [name] = useStoredName();
@@ -45,23 +45,23 @@ function Game() {
 
     useSync(socket, connected);
 
-    // Setup state & utils hook
+    // Setup states and utility hooks
     const [lastClick, setLastClick] = useState<[number, number]>();
     const wording = useI18n();
     const toast = useToast();
 
-    // Calculate things
+    // Turns, tables, and players calculation
     const myTurn = useMemo(() => players && players[currentPlayer] == name && !gameEnded, [players, currentPlayer, name, gameEnded])
     const table = useMemo(() => (openset !== undefined && goldenset !== undefined && boardSize !== undefined) ? make_table(openset, goldenset, boardSize) : undefined, [openset, goldenset, boardSize])
     const playerIndex = players?.indexOf(name);
 
-    // Loading Sound Effect
+    // Load sound effects
     const [playBuzzer] = useSound("./Buzzer1.ogg");
     const [playChicken] = useSound("./Chicken.ogg");
     const [playCoin] = useSound("./Coin.ogg");
     const [playRecovery] = useSound("./Recovery.ogg");
 
-    // Handling when player click cell
+    // Cell click handlers
     const cellClick = (j: number, i: number) => {
         if (gameEnded) {
             ((Math.random() > 0.1) ? playChicken : playBuzzer)()
@@ -73,7 +73,6 @@ function Game() {
             });
             return;
         }
-
         if (!myTurn) {
             ((Math.random() < 0.1) ? playChicken : playBuzzer)()
             toast({
@@ -84,7 +83,6 @@ function Game() {
             });
             return;
         }
-
         if (table === undefined) {
             toast({
                 title: "Invalid",
@@ -94,7 +92,6 @@ function Game() {
             });
             return;
         }
-
         if (table[j][i] !== CellType.UNOPEN) {
             toast({
                 title: "Invalid",
@@ -104,12 +101,9 @@ function Game() {
             });
             return;
         }
-
-
         checkMines([i, j]);
         setLastClick([i, j]);
     }
-
     useEffect(() => {
         if (lastClick === undefined || openset === undefined || (myTurn !== true)) {
             return;
@@ -123,11 +117,9 @@ function Game() {
             const [pos, has_bomb] = res;
             (has_bomb ? playRecovery : playCoin)();
         }
-
     }, [openset])
 
-
-    // Play BGM
+    // Background music
     const [bgmVol] = useAtom(bgmVolumeAtom);
     const [bgmSpeed] = useAtom(bgmPlaybackAtom);
     const [play, { stop }] = useSound("./Battle8.ogg", { volume: bgmVol / 100, playbackRate: bgmSpeed });
@@ -149,7 +141,6 @@ function Game() {
                         <Text>{myTurn ? wording.click_square : wording.wait}</Text>
                     </>
                 }
-
                 <Text>{wording.score}: {players[playerIndex]} <b>{scores[playerIndex]}</b> vs {players[1 - playerIndex]} <b>{scores[1 - playerIndex]}</b></Text>
                 <Box filter={myTurn || gameEnded ? undefined : "blur(2px)"}>
                     <Board table={table} cellClick={cellClick}></Board>

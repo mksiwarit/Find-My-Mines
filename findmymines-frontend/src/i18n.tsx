@@ -7,60 +7,55 @@ export enum Languge {
     THAI = "THAI",
 }
 
-
 type Word = { [key in keyof typeof Languge]: string }
-
-
-
 
 function asWording<T>(t: { [key in keyof T]: Word }) {
     return t;
 }
 
-
 export const wording = asWording({
     title: {
         ENG: "Find My Mines",
-        THAI: "ค้นหาระเบิดของฉัน"
+        THAI: "เกมค้นหาระเบิดของฉัน"
     },
     connecting: {
-        ENG: "Connecting...",
-        THAI: "กำลังเชื่อมต่อ..."
+        ENG: "Connecting",
+        THAI: "กำลังเชื่อมต่อ"
     },
     room_full: {
-        ENG: "Room Full",
+        ENG: "The room is full",
         THAI: "ห้องเติมแล้ว"
     },
     ended: {
-        ENG: "Game Ended",
-        THAI: "เกมจบ"
+        ENG: "The game has ended",
+        THAI: "เกมจบแล้ว"
     },
     click_square: {
-        ENG: "Click the black square",
-        THAI: "กดสี่เหลื่ยมดำ"
+        ENG: "Please click on the black square",
+        THAI: "คลิกที่สี่เหลื่ยมสีดำ"
     },
     wait: {
-        ENG: "Please wait...",
+        ENG: "Please wait",
         THAI: "กรุณารอ"
     },
     win: {
-        ENG: "You Win",
-        THAI: "คุณชนะ"
+        ENG: "You win!",
+        THAI: "คุณชนะ!"
     },
     lose: {
-        ENG: "You Lose",
-        THAI: "คุณแพ้"
+        ENG: "You lose!",
+        THAI: "คุณแพ้!"
     },
     your_turn: {
-        ENG: "Your Turn:",
-        THAI: "ตาคุณ:"
+        ENG: "Your turn: ",
+        THAI: "ตาคุณ: "
     },
     others_turn: {
-        ENG: "Others Turn:",
-        THAI: "ตาอีกฝั่ง:"
+        ENG: "Others turn: ",
+        THAI: "ตาอีกฝ่าย: "
     },
     score: {
-        ENG: "score",
+        ENG: "Score",
         THAI: "คะแนน"
     },
     tutorial_msg: {

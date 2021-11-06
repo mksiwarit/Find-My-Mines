@@ -22,8 +22,6 @@ import { useAtom } from 'jotai';
 import { bgmPlaybackAtom, bgmVolumeAtom, langugeAtom } from './state';
 import { Languge, useI18n } from './i18n';
 
-
-
 function App() {
   const { socket, connected, error } = useServerSocket();
   const { players, fetchPlayers } = usePlayersNames(socket);
@@ -45,7 +43,6 @@ function App() {
     return <h1>{wording.connecting}</h1>
   }
 
-
   return (
     <>
       <Heading>
@@ -57,7 +54,6 @@ function App() {
           <BgmSlider />
         </Box>
       </Heading>
-
 
       {(connected && playing !== undefined) && <>
         {gameOn ?
