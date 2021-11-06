@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Find My Mines Server</title>
+</head>
+
+<body>
+
+  <h1>Find My Mines Server</h1>
+  <h2>Current Players: {{value}}</h2>
+  <h2>Number of Current Players: {{number}}</h2>
+
+  <form action="/reset/" method="post">
+    <button name="resetBtn" type="submit" onclick="alert('The game has been reset!')">Reset Game</button>
+  </form>
+
+  <form action="/time/" method="post">
+    <input name="start_time" type="number" min="0" required></input>
+    <button type="submit">Set Start Time</button>
+  </form>
+
+  <form action="/board/" method="post">
+    <label>Board Size
+      <input name="board_size" type="number" min="1" value="6" required></input>
+    </label>
+    <label>Number of mine
+      <input name="num_mine" type="number" min="1" value="11" required></input>
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+
+  <span id="result"></span>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    const intervalID = setInterval(update_values, 1000);
+    function update_values() {
+      $.getJSON(
+        "localhost:5000/timer",
+        data => {
+          $("#result").text(data.result);
+          if (data.result == 0) {
+            clearInterval(intervalID);
+          }
+        }
+      )
+    }
+
+    fetch("http://localhost:5000/board/").then(res => res.json().then(({ board_size, num_mine }) => {
+      document.getElementsByName("board_size")[0].valueAsNumber = board_size
+      document.getElementsByName("num_mine")[0].valueAsNumber = num_mine
+    }))
+
+    fetch("http://localhost:5000/time/").then(res => res.json().then(({ start_time }) => {
+      document.getElementsByName("start_time")[0].valueAsNumber = start_time
+    }))
+
+  </script>
+</body>
+
+</html>
